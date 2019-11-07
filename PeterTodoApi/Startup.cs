@@ -15,6 +15,7 @@ using PeterTodoApi.Models;
 using PeterTodoApi.Contexts;
 using PeterTodoApi.Interfaces;
 using PeterTodoApi.Repositories;
+using PeterTodoApi.Services;
 
 namespace PeterTodoApi
 {
@@ -35,6 +36,7 @@ namespace PeterTodoApi
             services.AddDbContext<DefaultContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
             services.AddScoped<IProductsRepository, ProductsRepository>();
+            services.AddTransient<IProductsService, ProductsService>();
             services.AddControllers();
         }
 
