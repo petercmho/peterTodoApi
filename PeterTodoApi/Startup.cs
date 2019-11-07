@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using PeterTodoApi.Models;
+using PeterTodoApi.Contexts;
+using PeterTodoApi.Interfaces;
+using PeterTodoApi.Repositories;
 
 namespace PeterTodoApi
 {
@@ -29,6 +32,9 @@ namespace PeterTodoApi
         {
             services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<DefaultContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
+            services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddControllers();
         }
 
